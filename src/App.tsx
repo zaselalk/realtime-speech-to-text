@@ -10,7 +10,7 @@ function App() {
   const [intermediateText, setIntermediateText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const recognizerRef = useRef<SpeechRecognizer | null>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState('en-US');
+  const [selectedLanguage, setSelectedLanguage] = useState('en-IN');
 
   useEffect(() => {
     if (isRecording) {
