@@ -5,10 +5,7 @@ A modern, real-time speech-to-text application built with React, TypeScript, and
 ## 🎬 Preview
 
 You can watch a preview of the application in action below:
-
-<video src="doc/demo.mp4" controls width="600">
-  Your browser does not support the video tag.
-</video>
+![Real-Time Speech to Text App Preview](/doc/intro.gif)
 
 ## 🚀 Features
 
