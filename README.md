@@ -2,6 +2,14 @@
 
 A modern, real-time speech-to-text application built with React, TypeScript, and Azure AI Speech Services. This application provides continuous speech recognition with support for multiple languages and an intuitive user interface.
 
+## 🎬 Preview
+
+You can watch a preview of the application in action below:
+
+<video src="doc/demo.mp4" controls width="600">
+  Your browser does not support the video tag.
+</video>
+
 ## 🚀 Features
 
 - **Real-time Speech Recognition**: Continuous speech-to-text conversion powered by Azure AI
