@@ -11,6 +11,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const recognizerRef = useRef<SpeechRecognizer | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState('en-IN');
+  const [isConnecting, setIsConnecting] = useState(false);
 
   useEffect(() => {
     if (isRecording) {
@@ -26,7 +27,7 @@ function App() {
   }, [isRecording]);
 
   async function startContinuousRecognition() {
-    setIsLoading(true);
+    setIsConnecting(true);
     setDisplayText('');
     setIntermediateText('');
 
@@ -75,7 +76,9 @@ function App() {
     recognizer.startContinuousRecognitionAsync(
       () => {
         console.log('Continuous recognition started.');
-        // setIsLoading(false);
+        setIsConnecting(false);
+        setIsRecording(true);
+        setIsLoading(true);
       },
       (err) => {
         console.error('Error starting continuous recognition:', err);
@@ -90,6 +93,7 @@ function App() {
       recognizerRef.current.stopContinuousRecognitionAsync(
         () => {
           console.log('Continuous recognition stopped');
+          setIsLoading(false);
           recognizerRef.current?.close();
           recognizerRef.current = null;
         },
@@ -114,6 +118,7 @@ function App() {
         <MicroPhone
           isRecording={isRecording}
           setIsRecording={setIsRecording}
+          isConnecting={isConnecting}
         />
         {/* Language Selection */}
 
@@ -156,6 +161,7 @@ function App() {
                   <span className="animate-pulse text-blue-400 animation-delay-300">●</span>
                 </span>
               )}
+
 
               {/* Placeholder text when nothing is transcribed */}
               {!displayText && !intermediateText && !isLoading && (

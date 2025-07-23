@@ -1,13 +1,16 @@
 import { Mic, MicOff } from 'lucide-react'
 import React from 'react'
+import { LoadingSpinner } from './LoadingSpinner';
 
 interface MicroPhoneProps {
     isRecording: boolean;
     setIsRecording: React.Dispatch<React.SetStateAction<boolean>>;
+    isConnecting?: boolean;
 }
 export const MicroPhone: React.FC<MicroPhoneProps> = ({
     isRecording,
-    setIsRecording
+    setIsRecording,
+    isConnecting
 }) => {
     return (
         <div className="absolute bottom-10 right-10 flex items-end justify-center">
@@ -18,9 +21,17 @@ export const MicroPhone: React.FC<MicroPhoneProps> = ({
                     : 'bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/30'
                     }`}
             >
-                {isRecording ? (
+                {/* Show connecting */}
+                {isConnecting && (<LoadingSpinner />
+                )}
+
+
+                {/* Show mic off icon */}
+                {!isConnecting && isRecording && (
                     <MicOff className="w-8 h-8 text-white" />
-                ) : (
+                )}
+
+                {!isConnecting && !isRecording && (
                     <Mic className="w-8 h-8 text-white" />
                 )}
             </button>
