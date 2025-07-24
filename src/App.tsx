@@ -3,6 +3,9 @@ import { AudioConfig, ResultReason, SpeechConfig, SpeechRecognizer } from "micro
 import { getTokenOrRefresh } from "./token_util";
 import { Header } from "./components/Header";
 import { MicroPhone } from "./components/MicroPhone";
+import { Loadingdots } from "./components/Loadingdots";
+import { ImmediateText } from "./components/ImmediateText";
+import { DisplayText } from "./components/DisplayText";
 
 function App() {
   const [isRecording, setIsRecording] = useState<boolean>(false);
@@ -120,48 +123,25 @@ function App() {
           setIsRecording={setIsRecording}
           isConnecting={isConnecting}
         />
-        {/* Language Selection */}
-
 
         <div className=" backdrop-blur-lg  p-6 rounded-lg  ">
-
           <section>
             <div id="transcriptionOutput" className="bg-slate-900/50 text-white  p-4 rounded  overflow-y-auto text-2xl ">
               {/* Display final transcribed text */}
               {displayText && (
-                <span className="block mb-2">
-                  {displayText.split(' ').map((word, index) => (
-                    <span
-                      key={index}
-                      className="inline-block mr-1 animate-fadeIn"
-                      style={{
-                        animationDelay: `${index * 50}ms`,
-                        animationFillMode: 'both'
-                      }}
-                    >
-                      {word}
-                    </span>
-                  ))}
-                </span>
+                <DisplayText displayText={displayText} />
               )}
 
               {/* Display intermediate text (while speaking) */}
               {intermediateText && (
-                <span className="block text-blue-300 opacity-75 italic">
-                  {intermediateText}
-                  <span className="animate-pulse ml-1">|</span>
-                </span>
+                <ImmediateText intermediateText={intermediateText}
+                />
               )}
 
               {/* Loading indicator */}
               {isLoading && !intermediateText && (
-                <span className="inline-flex items-center">
-                  <span className="animate-pulse text-blue-400">●</span>
-                  <span className="animate-pulse text-blue-400 animation-delay-150">●</span>
-                  <span className="animate-pulse text-blue-400 animation-delay-300">●</span>
-                </span>
+                <Loadingdots />
               )}
-
 
               {/* Placeholder text when nothing is transcribed */}
               {!displayText && !intermediateText && !isLoading && (
