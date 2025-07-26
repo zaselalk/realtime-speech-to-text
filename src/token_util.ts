@@ -7,7 +7,9 @@ export async function getTokenOrRefresh() {
 
   if (speechToken === undefined) {
     try {
-      const res = await axios.get("http://localhost:3000/api/get-speech-token");
+      const res = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/get-speech-token`
+      );
       const token = res.data.token;
       const region = res.data.region;
       cookie.set("speech-token", region + ":" + token, {
